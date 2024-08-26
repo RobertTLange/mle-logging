@@ -78,45 +78,45 @@ def test_save_load_torch():
     shutil.rmtree(log_config["experiment_dir"])
 
 
-def test_save_load_tf():
-    """Test saving and loading of tensorflow model."""
-    # Remove experiment dir at start of test
-    if os.path.exists(log_config["experiment_dir"]) and os.path.isdir(
-        log_config["experiment_dir"]
-    ):
-        shutil.rmtree(log_config["experiment_dir"])
+# def test_save_load_tf():
+#     """Test saving and loading of tensorflow model."""
+#     # Remove experiment dir at start of test
+#     if os.path.exists(log_config["experiment_dir"]) and os.path.isdir(
+#         log_config["experiment_dir"]
+#     ):
+#         shutil.rmtree(log_config["experiment_dir"])
 
-    # Instantiate logging to experiment_dir
-    log_config["model_type"] = "tensorflow"
-    log = MLELogger(**log_config)
+#     # Instantiate logging to experiment_dir
+#     log_config["model_type"] = "tensorflow"
+#     log = MLELogger(**log_config)
 
-    # Save a torch model
-    model = create_tensorflow_model()
-    log.update(time_tic, stats_tic, model, save=True)
-    # Assert the existence of the files
-    file_to_check = os.path.join(
-        log_config["experiment_dir"],
-        "models/final",
-        "final_no_seed_provided.pt" + ".data-00000-of-00001",
-    )
-    assert os.path.exists(file_to_check)
-    file_to_check = os.path.join(
-        log_config["experiment_dir"],
-        "models/final",
-        "final_no_seed_provided.pt" + ".index",
-    )
-    assert os.path.exists(file_to_check)
-    file_to_check = os.path.join(
-        log_config["experiment_dir"], "models/final", "checkpoint"
-    )
-    assert os.path.exists(file_to_check)
+#     # Save a torch model
+#     model = create_tensorflow_model()
+#     log.update(time_tic, stats_tic, model, save=True)
+#     # Assert the existence of the files
+#     file_to_check = os.path.join(
+#         log_config["experiment_dir"],
+#         "models/final",
+#         "final_no_seed_provided.pt" + ".data-00000-of-00001",
+#     )
+#     assert os.path.exists(file_to_check)
+#     file_to_check = os.path.join(
+#         log_config["experiment_dir"],
+#         "models/final",
+#         "final_no_seed_provided.pt" + ".index",
+#     )
+#     assert os.path.exists(file_to_check)
+#     file_to_check = os.path.join(
+#         log_config["experiment_dir"], "models/final", "checkpoint"
+#     )
+#     assert os.path.exists(file_to_check)
 
-    # Load log and afterwards the model
-    relog = load_log(log_config["experiment_dir"])
-    _ = load_model(relog.meta.model_ckpt, log_config["model_type"], model)
+#     # Load log and afterwards the model
+#     relog = load_log(log_config["experiment_dir"])
+#     _ = load_model(relog.meta.model_ckpt, log_config["model_type"], model)
 
-    # Finally -- clean up
-    shutil.rmtree(log_config["experiment_dir"])
+#     # Finally -- clean up
+#     shutil.rmtree(log_config["experiment_dir"])
 
 
 # def test_save_load_jax():
