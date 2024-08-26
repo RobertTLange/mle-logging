@@ -6,4 +6,3 @@ tensorflow
 dm-haiku
 scikit-learn
 jax
-jaxlib
