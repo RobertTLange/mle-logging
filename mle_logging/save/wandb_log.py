@@ -1,7 +1,6 @@
 import os
 from typing import Dict, Optional
 import numpy as np
-import subprocess as sp
 
 
 def setup_wandb_env(wandb_config: dict):
@@ -80,7 +79,11 @@ class WandbLog(object):
         # Try opening port 10 times
         for _ in range(10):
             try:
-                wandb.init(config=config_dict)
+                wandb.init(
+                    config=config_dict,
+                    group=self.wandb_config["group"],
+                    job_type=self.wandb_config["job_type"],
+                )
                 self.correct_setup = True
                 break
             except Exception:

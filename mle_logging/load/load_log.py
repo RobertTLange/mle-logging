@@ -73,7 +73,10 @@ def load_meta_log(log_fname: str,
                 for ds in data_items:
                     data_to_store = {key: {} for key in data_items[ds]}
                     for i, o_name in enumerate(data_items[ds]):
-                        data_to_store[o_name] = run[seed_id][ds][o_name][:]
+                        try:
+                            data_to_store[o_name] = run[seed_id][ds][o_name][:]
+                        except KeyError:
+                            pass
                     source_to_store[ds] = data_to_store
                 result_dict[rn][seed_id] = source_to_store
     # Return as dot-callable dictionary

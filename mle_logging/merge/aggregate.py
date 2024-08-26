@@ -48,7 +48,10 @@ def aggregate_single_eval(
         for i, o_name in enumerate(data_items[ds]):
             for i, seed_id in enumerate(all_seeds_for_run):
                 seed_run = result_dict[seed_id]
-                data_to_store[o_name].append(seed_run[ds][o_name][:])
+                try:
+                    data_to_store[o_name].append(seed_run[ds][o_name][:])
+                except TypeError:
+                    pass
         source_to_store[ds] = data_to_store
     new_results_dict[eval_name] = source_to_store
 

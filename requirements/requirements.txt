@@ -6,3 +6,4 @@ dotmap
 pickle5; python_version < '3.8'
 rich
 pandas
+wandb

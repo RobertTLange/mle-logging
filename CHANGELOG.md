@@ -1,3 +1,9 @@
+## [v0.0.6] - [08/2024]
+
+### Fixed
+
+- Adds wandb requirement
+
 ## [v0.0.5] - [03/2023]
 
 ### Added
